@@ -1,0 +1,26 @@
+
+
+.slider {
+    position: relative;
+    height: auto;
+    width: auto;
+    
+    &__img-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    &__before-image {
+        object-fit: cover;
+        object-position: 0 0;
+    }
+
+    &__divider {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
