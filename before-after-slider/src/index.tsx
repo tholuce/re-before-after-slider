@@ -10,8 +10,8 @@ ReactDOM.render(
     <App 
       before="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
       after="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-      height="400px"
-      width="700px"
+      height={400}
+      width={700}
       orientation = {Orientation.Vertical}
     />
   </React.StrictMode>,

@@ -5,23 +5,28 @@ import './divider.scss';
 interface DividerProps {
     orientation: Orientation;
     setWidth: React.Dispatch<React.SetStateAction<string>>
+    panelWidth: number;
 }
 
-function MouseMove(event: MouseEvent, overlay: MutableRefObject<HTMLDivElement>, isMouseDown: boolean, offset: number, setWidth: React.Dispatch<React.SetStateAction<string>>): void {    
+function MouseMove(event: MouseEvent, overlay: MutableRefObject<HTMLDivElement>, isMouseDown: boolean, offset: number, setWidth: React.Dispatch<React.SetStateAction<string>>, panelWidth: number): void {    
     event.preventDefault();
     if(!isMouseDown){
         return;
     }
-    overlay.current.style.left = (event.pageX + offset) + 'px';
+    let newPosition = event.pageX + offset;
+    if(panelWidth < newPosition) {
+        return;
+    }
+    overlay.current.style.left = newPosition + 'px';
     setWidth(overlay.current.style.left);
 }
 
-const Divider = ({orientation, setWidth}: DividerProps) => {    
+const Divider = ({orientation, setWidth, panelWidth}: DividerProps) => {    
     const dividerRef: MutableRefObject<HTMLDivElement> = useRef() as MutableRefObject<HTMLDivElement>;
     const [isMouseDown, setMouseDown] = useState<boolean>(false);
     const [offset, setOffset] = useState<number>(0);
     document.onmouseup = () =>{setMouseDown(false)};
-    document.onmousemove = (ev) => {MouseMove(ev, dividerRef, isMouseDown, offset, setWidth)}
+    document.onmousemove = (ev) => {MouseMove(ev, dividerRef, isMouseDown, offset, setWidth, panelWidth)}
     return <div ref={dividerRef} className="divider" onMouseDown={(ev)=>{setMouseDown(true); setOffset(ev.clientX - ev.currentTarget.getBoundingClientRect().left)}}>
         <div className="line" />
         <div className="circle-wrapper">
