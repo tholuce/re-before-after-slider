@@ -7,6 +7,7 @@ import {Orientation} from './enums';
 
 ReactDOM.render(
   <React.StrictMode>
+    <div className="wrapper">
     <App 
       before="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
       after="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
@@ -14,6 +15,7 @@ ReactDOM.render(
       width={700}
       orientation = {Orientation.Vertical}
     />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
